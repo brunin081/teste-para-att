@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA Educacional - Criação de Aulas</title>
+    <link rel="stylesheet" href="{{ url_for(" static ", filename="style.css ") }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <span>IA Educacional</span>
+            </div>
+            <button id="saveBtn" class="save-btn">
+                <i class="fas fa-save"></i> Salvar Rascunho
+            </button>
+        </div>
+        <div class="container progress-bar">
+            <div class="progress-steps">
+                <div class="step" id="step-1">
+                    <div class="step-circle">1</div>
+                    <span>Título e descrição</span>
+                </div>
+                <div class="step" id="step-2">
+                    <div class="step-circle">2</div>
+                    <span>Definir objetivos</span>
+                </div>
+                <div class="step" id="step-3">
+                    <div class="step-circle">3</div>
+                    <span>Configurações</span>
+                </div>
+                <div class="step" id="step-4">
+                    <div class="step-circle">4</div>
+                    <span>Plano de aula</span>
+                </div>
+                <div class="step" id="step-5">
+                    <div class="step-circle">5</div>
+                    <span>Revisar e editar</span>
+                </div>
+                <div class="progress-line">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main container">
+        <!-- Step 1: Título e descrição -->
+        <section id="step1" class="step-content active">
+            <div class="step-header">
+                <h1>Comece dando um título para sua aula</h1>
+                <p>O título ajudará você e seus alunos a identificarem o que é uma aula mais facilmente.</p>
+            </div>
+            <div class="start-options">
+                <div class="option-card" id="startFromScratch">
+                    <div class="option-icon"><i class="fas fa-pencil-alt"></i></div>
+                    <h3>Começar do zero</h3>
+                    <p>Crie sua aula do zero, escolhendo o título, descrição e objetivos de aprendizagem!</p>
+                    <div class="option-arrow"><i class="fas fa-arrow-right"></i></div>
+                </div>
+                <div class="option-card" id="startFromTemplate">
+                    <div class="option-icon"><i class="fas fa-file-upload"></i></div>
+                    <h3>Começar com um arquivo</h3>
+                    <p>Crie sua aula a partir de um arquivo de sua escolha, desde documentos até power points!</p>
+                    <div class="option-arrow"><i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+            <div class="lesson-form">
+                <div class="form-group">
+                    <label for="lessonTitle">Título da Aula</label>
+                    <input type="text" id="lessonTitle" name="lessonTitle" placeholder="Defina o título da aula (por exemplo, Células Animais )" required>
+                </div>
+                <div class="form-group">
+                    <label for="lessonDescription">Descrição da Aula</label>
+                    <textarea id="lessonDescription" name="lessonDescription" placeholder="Descreva brevemente o que será abordado na aula" required></textarea>
+                </div>
+                <div class="step-actions">
+                    <button type="button" class="btn btn-primary" onclick="nextBtn()">Próximo <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="examples-section">
+                <h4><i class="fas fa-lightbulb"></i> Exemplos:</h4>
+                <div class="example-tags">
+                    <span class="example-tag">Introdução à Programação</span>
+                    <span class="example-tag">História do Brasil Império</span>
+                    <span class="example-tag">Ciclo da Água</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 2: Definir objetivos -->
+        <section id="step2" class="step-content">
+            <div class="step-header">
+                <h1>Defina os objetivos de aprendizagem</h1>
+                <p>O que os alunos deverão ser capazes de fazer após esta aula?</p>
+            </div>
+            <div class="lesson-form">
+                <div class="form-group">
+                    <label for="learningObjectives">Objetivos de Aprendizagem</label>
+                    <textarea id="learningObjectives" name="learningObjectives" placeholder="Ex: Ao final da aula, os alunos deverão ser capazes de identificar as principais partes de uma célula animal e suas funções." required></textarea>
+                    <p class="help-text">Liste os objetivos de forma clara e mensurável.</p>
+                </div>
+                <div class="step-actions">
+                    <button type="button" class="btn btn-secondary" onclick="prevBtn()"><i class="fas fa-arrow-left"></i> Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextBtn()">Próximo <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 3: Configurações -->
+        <section id="step3" class="step-content">
+            <div class="step-header">
+                <h1>Configurações da Turma e Aula</h1>
+                <p>Ajuste as configurações para personalizar o plano de aula.</p>
+            </div>
+            <div class="lesson-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="subject">Disciplina/Unidade Curricular</label>
+                        <input type="text" id="subject" name="subject" placeholder="Ex: Biologia" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gradeLevel">Nível da Turma</label>
+                        <select id="gradeLevel" name="gradeLevel" required>
+                            <option value="">Selecione</option>
+                            <option value="fundamental">Fundamental</option>
+                            <option value="medio">Médio</option>
+                            <option value="tecnico">Técnico</option>
+                            <option value="superior">Superior</option>
+                            <option value="formacao_continuada">Formação Continuada</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="duration">Duração da Aula</label>
+                        <input type="text" id="duration" name="duration" placeholder="Ex: 50 minutos ou 2 horas" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentProfile">Perfil dos Alunos</label>
+                        <input type="text" id="studentProfile" name="studentProfile" placeholder="Ex: idade média, curso, características relevantes" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="finalProduct">Produto Final Esperado</label>
+                    <input type="text" id="finalProduct" name="finalProduct" placeholder="Ex: relatório, apresentação, protótipo, prática em laboratório, quiz, estudo de caso" required>
+                </div>
+                <div class="form-group">
+                    <label for="necessaryTopics">Tópicos/Conhecimentos Necessários</label>
+                    <textarea id="necessaryTopics" name="necessaryTopics" placeholder="Quais tópicos/conhecimentos precisam necessariamente estar na aula?" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="methodology">Metodologia Desejada</label>
+                    <input type="text" id="methodology" name="methodology" placeholder="Ex: aprendizagem baseada em problemas, estudos de caso, aula expositiva, prática em laboratório">
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="suggestActiveMethods" name="suggestActiveMethods">
+                        <span class="checkmark"></span>
+                        Deseja que sejam sugeridas metodologias ativas automaticamente pela IA?
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="resources">Recursos Didáticos Disponíveis</label>
+                    <input type="text" id="resources" name="resources" placeholder="Ex: computador, projetor, laboratório, ferramentas, softwares">
+                    <p class="help-text">Separe por vírgulas.</p>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="suggestExternalMaterials" name="suggestExternalMaterials">
+                        <span class="checkmark"></span>
+                        Gostaria que a IA sugira links de vídeos, imagens ou materiais externos atualizados?
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="includeBibliography" name="includeBibliography">
+                        <span class="checkmark"></span>
+                        Deseja incluir uma bibliografia técnica e atualizada sugerida pela IA?
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="hasNeurodivergent" name="hasNeurodivergent">
+                        <span class="checkmark"></span>
+                        Incluir estratégias para alunos com neurodivergências
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="specificInclusiveStrategies">Estratégias Inclusivas Específicas</label>
+                    <textarea id="specificInclusiveStrategies" name="specificInclusiveStrategies" placeholder="Ex: mais recursos visuais, pausas planejadas, atividades curtas (opcional)"></textarea>
+                    <p class="help-text">Caso tenha marcado a opção acima, especifique estratégias que gostaria que fossem consideradas.</p>
+                </div>
+                <div class="form-group">
+                    <h3>Entregas Desejadas</h3>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="generateLessonPlan" name="generateLessonPlan" checked>
+                            <span class="checkmark"></span>
+                            Plano de Aula
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="generateSlides" name="generateSlides" checked>
+                            <span class="checkmark"></span>
+                            Slides
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="generateTheoreticalProblem" name="generateTheoreticalProblem" checked>
+                            <span class="checkmark"></span>
+                            Situação-Problema Teórica
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="generatePracticalProblem" name="generatePracticalProblem" checked>
+                            <span class="checkmark"></span>
+                            Situação-Problema Prática
+                        </label>
+                    </div>
+                </div>
+                <div class="step-actions">
+                    <button type="button" class="btn btn-secondary" onclick="prevBtn()"><i class="fas fa-arrow-left"></i> Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextBtn()">Gerar Plano BitTech<i class="fas fa-magic"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 4: Geração do Plano de Aula -->
+        <section id="step4" class="step-content">
+            <div class="generating-content">
+                <div class="generating-header">
+                    <h1>Estamos criando o conteúdo o pacote!</h1>
+                    <p>Isto deve levar entre 1 e 2 minutos, então sinta-se à vontade para esperar aqui. Se precisar se ausentar, não se preocupe – avisaremos quando terminar!</p>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-circle">
+                        <div class="progress-bar-circular">
+                            <span class="progress-text">0%</span>
+                        </div>
+                    </div>
+                    <p class="progress-status">Iniciando a geração...</p>
+                </div>
+                <div class="lesson-preview">
+                    <div class="lesson-card">
+                        <div class="lesson-image"><i class="fas fa-book-open"></i></div>
+                        <div class="lesson-info">
+                            <h3 id="previewTitle">Título da Aula</h3>
+                            <p id="previewDescription">Descrição da aula...</p>
+                        </div>
+                    </div>
+                    <div class="toggle-option">
+                        <label class="toggle-label">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                            Habilitar tutor virtual
+                        </label>
+                    </div>
+                    <div class="lesson-modules">
+                        <div class="module-header">
+                            <div><i class="fas fa-layer-group"></i> Módulos</div>
+                            <a href="#" class="view-all">Ver todos (0)</a>
+                        </div>
+                        <div class="module-item">
+                            <i class="fas fa-file-alt"></i>
+                            <span id="moduleTitle">Introdução: Disciplina</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 5: Revisar e editar -->
+        <section id="step5" class="step-content">
+            <div class="result-header">
+                <h1>Conteúdo da aula gerado!</h1>
+                <p>Use os botões abaixo para navegar entre os diferentes componentes gerados pela IA.</p>
+            </div>
+            <div class="content-navigation">
+                <button type="button" class="nav-btn active" data-content="plano">Plano de Aula</button>
+                <button type="button" class="nav-btn" data-content="slides">Slides</button>
+                <button type="button" class="nav-btn" data-content="teorica">Situação Problema - Teórica</button>
+                <button type="button" class="nav-btn" data-content="pratica">Situação Problema - Prática</button>
+            </div>
+            <div class="result-actions">
+                <button type="button" class="btn btn-primary" id="reviewBtn">Revisar e editar aula <i class="fas fa-edit"></i></button>
+            </div>
+            <div class="result-progress">
+                <div class="progress-bar-result">
+                    <div class="progress-fill-result" style="width: 100%;"></div>
+                </div>
+                <span class="progress-percentage">100%</span>
+            </div>
+            <div class="lesson-result">
+                <div class="lesson-card-result">
+                    <div class="lesson-image-result"><i class="fas fa-book-open"></i></div>
+                    <div class="lesson-info-result">
+                        <h3 id="resultTitle">Título da Aula</h3>
+                        <p id="resultDescription">Plano de aula personalizado criado com sucesso.</p>
+                    </div>
+                </div>
+                <div class="lesson-content" id="lessonContent">
+                    <div class="content-section active" id="content-plano">
+                        <!-- Conteúdo do plano de aula será inserido aqui -->
+                    </div>
+                    <div class="content-section" id="content-slides">
+                        <!-- Conteúdo dos slides será inserido aqui -->
+                    </div>
+                    <div class="content-section" id="content-teorica">
+                        <!-- Conteúdo da situação-problema teórica será inserido aqui -->
+                    </div>
+                    <div class="content-section" id="content-pratica">
+                        <!-- Conteúdo da situação-problema prática será inserido aqui -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for(" static ", filename="script.js ") }}"></script>
+</body>
+
+</html>
